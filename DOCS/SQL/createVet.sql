@@ -1,0 +1,1 @@
+CREATE TABLE `vetware_test`.`veterinary` (`id` INT UNSIGNED NOT NULL , `name` VARCHAR(32) NOT NULL , `adress` VARCHAR(128) NOT NULL , `responsable` VARCHAR(32) NOT NULL , `type_and_function` INT NOT NULL , `location` POINT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
