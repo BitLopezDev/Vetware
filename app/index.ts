@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Your code here
   pre_edit();
 });
-const animals = {
+const VoCanimals = {
   Lady: {
     animalid: 1,
     name: "Lady",
@@ -26,17 +26,33 @@ const animals = {
     medical_history: 2,
   },
 };
-class animal {
-  //protected animalid: number;
-  name: string;
-  owner_id: number;
-  ensured: boolean;
-  for_adoption: boolean;
-  belongs_to_vet: boolean;
+
+interface iNew_Animal {
+
+   name: string;
+   owner_id: number;
+   ensured: boolean;
+   for_adoption: boolean;
+   belongs_to_vet: boolean;
   created_at: string;
-  updated_at: any;
+   updated_at: any;
+   medical_history: number;
+ 
+}
+
+
+
+class cAnimal  {
+  protected animalid: number;
+  public name: string;
+  public  owner_id: number;
+ public ensured: boolean;
+  public for_adoption: boolean;
+  public belongs_to_vet: boolean;
+ public created_at: string;
+  public updated_at: any;
   //when PDO last two come from DB
-  medical_history: number;
+  public medical_history: number;
 
   constructor(
     animalid: number,
@@ -49,7 +65,7 @@ class animal {
     medical_history: number,
     ...rest: String[]
   ) {
-    // this.animalid = animalid;
+    this.animalid = animalid;
     this.name = name;
     this.owner_id = owner_id;
     this.ensured = ensured;
@@ -59,7 +75,6 @@ class animal {
     this.updated_at = this.current_time();
     this.medical_history = medical_history;
   }
-
   current_time() {
     var today = new Date();
     var date =
@@ -73,12 +88,28 @@ class animal {
     var complete_date = date + ", " + time;
     return { complete_date };
   }
+
+  protected store_animal (new_animal : iNew_Animal, callback : Function | null = null) {
+    //function_that_checks_integrity](new_animal);
+    let name = new_animal.name;
+    localStorage.setItem(`BitLopezDev_Veterinay_V0.0.0:store_animal(${new_animal.name})`, JSON.stringify(new_animal));
+    if (!!callback) {
+      callback();
+    }
+  }
+  protected revive_stored_animal () {
+    let storedValue = localStorage.getItem('BitLopezDev_Veterinay_V0.0.0:store_animal');
+  }
+
 }
 
+function the_emptyness(){}
+
+
 function pre_edit() {
-  let preElement: HTMLElement | null = document.getElementById("preElement");
+  let preElement : HTMLElement | null = document.getElementById("preElement");
   if (preElement) {
-    preElement.innerHTML = JSON.stringify(animals);
+    preElement.innerHTML = JSON.stringify(VoCanimals);
   } else {
     throw new Error();
   }
