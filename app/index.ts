@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Your code here
-  pre_edit();
+  Fpre_edit();
 });
 const VoCanimals = {
   Lady: {
@@ -28,28 +28,24 @@ const VoCanimals = {
 };
 
 interface iNew_Animal {
-
-   name: string;
-   owner_id: number;
-   ensured: boolean;
-   for_adoption: boolean;
-   belongs_to_vet: boolean;
+  name: string;
+  owner_id: number;
+  ensured: boolean;
+  for_adoption: boolean;
+  belongs_to_vet: boolean;
   created_at: string;
-   updated_at: any;
-   medical_history: number;
- 
+  updated_at: any;
+  medical_history: number;
 }
 
-
-
-class cAnimal  {
+class cAnimal {
   protected animalid: number;
   public name: string;
-  public  owner_id: number;
- public ensured: boolean;
+  public owner_id: number;
+  public ensured: boolean;
   public for_adoption: boolean;
   public belongs_to_vet: boolean;
- public created_at: string;
+  public created_at: string;
   public updated_at: any;
   //when PDO last two come from DB
   public medical_history: number;
@@ -72,10 +68,10 @@ class cAnimal  {
     this.for_adoption = for_adoption;
     this.belongs_to_vet = belongs_to_vet;
     this.created_at = created_at;
-    this.updated_at = this.current_time();
+    this.updated_at = this.mCurrent_Time();
     this.medical_history = medical_history;
   }
-  current_time() {
+  public mCurrent_Time() {
     var today = new Date();
     var date =
       today.getDate() +
@@ -89,25 +85,31 @@ class cAnimal  {
     return { complete_date };
   }
 
-  protected store_animal (new_animal : iNew_Animal, callback : Function | null = null) {
+  protected m_Store_Animal(
+    Pnew_animal: iNew_Animal,
+    callback: Function | null = null
+  ) {
     //function_that_checks_integrity](new_animal);
-    let name = new_animal.name;
-    localStorage.setItem(`BitLopezDev_Veterinay_V0.0.0:store_animal(${new_animal.name})`, JSON.stringify(new_animal));
+    
+    localStorage.setItem(
+      `BitLopezDev_Veterinay_V0.0.0:m_Store_Animal(${Pnew_animal.name})`,
+      JSON.stringify(Pnew_animal)
+    );
     if (!!callback) {
       callback();
     }
   }
-  protected revive_stored_animal () {
-    let storedValue = localStorage.getItem('BitLopezDev_Veterinay_V0.0.0:store_animal');
+  protected m_Revive_Stored_Animal() {
+    let VaLstoredValue = localStorage.getItem(
+      "BitLopezDev_Veterinay_V0.0.0:store_animal"
+    );
   }
-
 }
 
-function the_emptyness(){}
+function the_emptyness() {}
 
-
-function pre_edit() {
-  let preElement : HTMLElement | null = document.getElementById("preElement");
+function Fpre_edit() {
+  let preElement: HTMLElement | null = document.getElementById("preElement");
   if (preElement) {
     preElement.innerHTML = JSON.stringify(VoCanimals);
   } else {
